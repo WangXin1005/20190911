@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>珠峰培训-移动端滑屏案例</title>
+	<!-- IMPORT CSS & REM -->
+	<!-- <link rel="stylesheet/less" href="css/index.less">
+	<script src="js/less-2.5.3.min.js"></script> -->
+	<link rel="stylesheet" href="css/index.min.css">
+	<script>
+		~ function () {
+			let evt = 'onorientationchange' in window ? 'orientationchange' : 'resize';
+
+			function computed() {
+				let HTML = document.documentElement,
+					deviceW = HTML.clientWidth,
+					designW = 750,
+					ratio = deviceW / designW * 100;
+				if (deviceW >= designW) ratio = 100;
+				HTML.style.fontSize = ratio + 'px';
+			}
+			computed();
+			window.addEventListener(evt, computed);
+		}();
+	</script>
+	<script src="js/prefixfree.min.js"></script>
+</head>
+
+<body>
+	<main class="container">
+		<!-- 魔方区域 -->
+		<section class="cubeBox">
+			<ul class="cube">
+				<li><img src="images/zf_cube1.png" alt=""></li>
+				<li><img src="images/zf_cube2.png" alt=""></li>
+				<li><img src="images/zf_cube3.png" alt=""></li>
+				<li><img src="images/zf_cube4.png" alt=""></li>
+				<li><img src="images/zf_cube5.png" alt=""></li>
+				<li><img src="images/zf_cube6.png" alt=""></li>
+			</ul>
+			<!-- <span class="tip"></span> -->
+		</section>
+
+		<!-- 滑屏区域 -->
+		<section class="swiperBox">
+			<a href="javascript:;" class="returnBox"></a>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide page1">
+						<dl class="baseInfo">
+							<dt>自我介绍</dt>
+							<dd><em>01</em>
+								<p>姓名：周啸天</p>
+							</dd>
+							<dd><em>02</em>
+								<p>性别：你猜</p>
+							</dd>
+							<dd><em>03</em>
+								<p>年龄：OLD MAN</p>
+							</dd>
+							<dd><em>04</em>
+								<p>户籍：河北省承德市</p>
+							</dd>
+							<dd><em>05</em>
+								<p>工作年限：10年</p>
+							</dd>
+							<dd><em>06</em>
+								<p>学历：家里蹲大学-博士后</p>
+							</dd>
+							<dd><em>07</em>
+								<p>邮箱：mamaburangwogaosuni@qq.com</p>
+							</dd>
+							<dd><em>08</em>
+								<p>电话：110114119120</p>
+							</dd>
+							<dd><em>09</em>
+								<p>兴趣：读书、敲代码</p>
+							</dd>
+							<dd><em>10</em>
+								<p>擅长：JAVASCRIPT（ES6）、AJAX、VUE、REACT、NODE、小程序、职业规划</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="swiper-slide page2">
+						<h3>课程体系</h3>
+						<img src="images/zf_course1.png" alt="">
+						<img src="images/zf_course2.png" alt="">
+						<img src="images/zf_course3.png" alt="">
+						<img src="images/zf_course4.png" alt="">
+						<img src="images/zf_course5.png" alt="">
+						<img src="images/zf_course6.png" alt="">
+						<img src="images/zf_course.png" alt="">
+					</div>
+					<div class="swiper-slide page3">
+						<img src="images/zf_teacherTip.png" alt="" class="title">
+
+					</div>
+					<div class="swiper-slide page4">4</div>
+					<div class="swiper-slide page5">5</div>
+					<div class="swiper-slide page6">6</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 音乐区域 -->
+		<section class="musicBox">
+			<!-- AUDIO支持的格式：mp3/ogg/wav/m3u8直播流 -->
+			<audio class="musicAudio" src="audio/music.mp3" loop preload="none">
+			</audio>
+			<a href="javascript:;" class="musicIcon"></a>
+		</section>
+	</main>
+
+	<!-- IMPORT JS -->
+	<script src="js/zepto.min.js"></script>
+	<script src="js/swiper.min.js"></script>
+	<script src="js/makisu.min.js"></script>
+	<script src="js/index.js"></script>
+</body>
+
+</html>
+
+<!-- 
+	移动端手机端联调
+		1.在本地建立WEB服务器，让手机和电脑保持在同一个局域网中，这样在手机端就可以访问电脑中的项目了（PC端关掉防火墙）
+		2.安装Hbuilder，这样也可以联调
+		3.把项目部署到服务器（测试）上，然后进行测试
+		4.还有一些其它的工具（MAC的偏多）
+		......
+ -->

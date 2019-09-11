@@ -1,0 +1,439 @@
+@import './reset.min.less';
+@import './swiper.min.less';
+@import (reference) './common.less';
+
+@keyframes bounceInLeft {
+
+	0%,
+	60%,
+	75%,
+	90%,
+	to {
+		animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+	}
+
+	0% {
+		opacity: 0;
+		transform: translate3d(-3000px, 0, 0)
+	}
+
+	60% {
+		opacity: 1;
+		transform: translate3d(25px, 0, 0)
+	}
+
+	75% {
+		transform: translate3d(-10px, 0, 0)
+	}
+
+	90% {
+		transform: translate3d(5px, 0, 0)
+	}
+
+	to {
+		transform: translateZ(0);
+		opacity: 1;
+	}
+}
+
+@keyframes shake {
+
+	0%,
+	to {
+		transform: translateZ(0)
+	}
+
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translate3d(-10px, 0, 0)
+	}
+
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translate3d(10px, 0, 0)
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes tada {
+	0% {
+		transform: scaleX(1)
+	}
+
+	10%,
+	20% {
+		transform: scale3d(.9, .9, .9) rotate(-3deg)
+	}
+
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: scale3d(1.1, 1.1, 1.1) rotate(3deg)
+	}
+
+	40%,
+	60%,
+	80% {
+		transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg)
+	}
+
+	to {
+		transform: scaleX(1);
+		opacity: 1;
+	}
+}
+
+@keyframes heartBeat {
+	0% {
+		transform: scale(1)
+	}
+
+	14% {
+		transform: scale(1.3)
+	}
+
+	28% {
+		transform: scale(1)
+	}
+
+	42% {
+		transform: scale(1.3)
+	}
+
+	70% {
+		transform: scale(1)
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes musicMove {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* ===基础样式=== */
+html {
+	//=>规定在750PX的设计稿中:1REM=100PX
+	font-size: 100px;
+}
+
+html,
+body {
+	height: 100%;
+	overflow: hidden;
+	background: #E4E4E4;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 750px;
+	height: 100%;
+}
+
+.cubeBox,
+.swiperBox {
+	display: none;
+	height: 100%;
+}
+
+/* ===魔方区域=== */
+.cubeBox {
+	position: relative;
+	background: url('../images/zf_cubeBg.jpg') no-repeat center center;
+	background-size: cover;
+
+	//=>提示文字
+	.tip {
+		width: 3.94rem;
+		height: .44rem;
+		bottom: .5rem;
+		.BG-IMAGE('zf_cubeTip.png');
+		.CENTER-X(3.94);
+	}
+
+	//=>魔方盒子
+	.cube {
+		width: 5.1rem;
+		height: 5.1rem;
+		.CENTER(5.1, 5.1);
+
+		li {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+	//=>魔方盒子的3D处理
+	//1.给3D变形元素所在的容器（舞台）设置视距，防止“一叶障目”
+	perspective: 2000px;
+
+	.cube {
+		//2.给需要3D变形的元素设置3D变形特征
+		transform-style: preserve-3d;
+		// transform: scale(.8) rotateX(-30deg) rotateY(45deg);
+		transition: transform .3s linear;
+
+		//3.控制每一个面的移动和旋转
+		li:nth-child(1) {
+			transform: translateZ(2.55rem);
+		}
+
+		li:nth-child(2) {
+			transform: translateZ(-2.55rem) rotateY(180deg);
+		}
+
+		li:nth-child(3) {
+			transform: translateX(-2.55rem) rotateY(-90deg);
+		}
+
+		li:nth-child(4) {
+			transform: translateX(2.55rem) rotateY(90deg);
+		}
+
+		li:nth-child(5) {
+			transform: translateY(-2.55rem) rotateX(90deg);
+		}
+
+		li:nth-child(6) {
+			transform: translateY(2.55rem) rotateX(-90deg);
+		}
+	}
+}
+
+/* ===滑屏区域=== */
+.swiperBox {
+	.returnBox {
+		position: absolute;
+		top: .2rem;
+		right: .2rem;
+		z-index: 9999;
+		width: .64rem;
+		height: .75rem;
+		.BG-IMAGE('zf_return.png');
+	}
+
+	.swiper-container,
+	.swiper-slide {
+		position: relative;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.page1 {
+		background: #FFF;
+		perspective: 2000px;
+
+		.baseInfo {
+			box-sizing: border-box;
+			width: 6rem;
+			height: 6.6rem;
+			transform-style: preserve-3d;
+			.CENTER(6, 6.6);
+
+			dt,
+			dd {
+				box-sizing: border-box;
+				height: .6rem;
+				line-height: .6rem;
+				border-top: .02rem dashed rgba(255, 255, 255, .3);
+				background: #8FBB4C;
+
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				font-size: .28rem;
+			}
+
+			dt {
+				text-align: center;
+				font-size: .4rem;
+				color: yellow;
+			}
+
+			dd {
+				position: relative;
+				padding-left: .66rem;
+
+				em {
+					width: .36rem;
+					height: .42rem;
+					line-height: .42rem;
+					text-align: center;
+					color: #FFF;
+					font-size: .2rem;
+					font-style: normal;
+					z-index: 999;
+					left: .15rem;
+					.BG-IMAGE('zf_outline.png');
+					.CENTER-Y(.42);
+				}
+
+				p {
+					position: relative;
+					z-index: 999;
+				}
+			}
+		}
+	}
+
+	.page2 {
+		background: #FFF9C1;
+
+		h3 {
+			position: absolute;
+			top: .5rem;
+			left: 0;
+			width: 100%;
+			line-height: .9rem;
+			text-align: center;
+			font-size: .6rem;
+			font-weight: normal;
+			font-family: Microsoft JhengHei;
+			opacity: 0;
+		}
+
+		img {
+			opacity: 0;
+			width: 1rem;
+			height: 1rem;
+			.CENTER(1, 1);
+
+			&:nth-of-type(7) {
+				width: 1.32rem;
+				height: 1.7rem;
+				.CENTER(1.32, 1.7);
+			}
+		}
+	}
+
+	//=>设置第二页的动画
+	#page2 {
+		h3 {
+			animation: bounceInLeft 1s both;
+		}
+
+		img {
+			&:nth-of-type(7) {
+				animation: shake 1s both;
+			}
+
+			&:nth-of-type(1) {
+				margin-top: unit(-.5-(2.4), rem);
+			}
+
+			&:nth-of-type(2) {
+				margin-top: -1.7rem;
+				margin-left: 1.5rem;
+			}
+
+			&:nth-of-type(3) {
+				margin-top: .7rem;
+				margin-left: 1.5rem;
+			}
+
+			&:nth-of-type(4) {
+				margin-top: 1.9rem;
+			}
+
+			&:nth-of-type(5) {
+				margin-top: .7rem;
+				margin-left: -2.5rem;
+			}
+
+			&:nth-of-type(6) {
+				margin-top: -1.7rem;
+				margin-left: -2.5rem;
+			}
+
+			transition: .5s;
+			opacity: 1;
+			animation: tada 1s .5s infinite;
+		}
+	}
+
+	.page3 {
+		background: #E45454;
+
+		.title {
+			opacity: 0;
+			width: 3.82rem;
+			height: 1.41rem;
+			top: .5rem;
+			.CENTER-X(3.82);
+		}
+	}
+
+	#page3 {
+		.title {
+			animation: bounceInLeft 1s both;
+		}
+	}
+
+	.page4 {
+		background: #FAC471;
+	}
+
+	.page5 {
+		background: #FBFFE8;
+	}
+
+	.page6 {
+		background: #5975FF;
+	}
+}
+
+/*
+ * 滑屏页面中的帧动画
+ *   1.先写每一页的结构和基础样式（写在.page?下） 
+ *   2.让所有后续需要运动的元素初始透明度为零
+ *   3.所有运动的动画（大部分动画在animate.css中都可以找到，把最后一帧透明度设置为1）我们写在 #page? 下（ID选择器的优先级高）
+ *   4.在SWIPER切换的时候，运动到当前页面，就给当前页面设置一个ID等于PAGE?，其余页面的ID都移除掉即可 
+ */
+
+/* ===音乐区域=== */
+.musicBox {
+	.musicAudio {
+		display: none;
+	}
+
+	.musicIcon {
+		display: none;
+		position: absolute;
+		top: .2rem;
+		left: .2rem;
+		z-index: 9999;
+		width: .6rem;
+		height: .6rem;
+		.BG-IMAGE('music.svg');
+
+		//=>.musicIcon.move
+		&.move {
+			animation: musicMove 1s linear infinite;
+		}
+	}
+}
